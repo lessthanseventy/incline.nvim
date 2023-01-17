@@ -127,7 +127,7 @@ end
 M.string = wrapped(M.type 'string')
 M.string.length = function(len)
   return function(val)
-    return #val == len
+    return #val > len
   end
 end
 
@@ -234,10 +234,7 @@ M.highlight.args = M.table.of_any {
   default = M.bool,
 }
 
-M.highlight.link = M.table.of_all {
-  group = M.string,
-  default = M.bool,
-}
+M.highlight.link = M.table.of_all { group = M.string, default = M.bool }
 
 M.highlight.any = M.any { M.highlight.args, M.highlight.link, M.string }
 

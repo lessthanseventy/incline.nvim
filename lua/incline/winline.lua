@@ -206,11 +206,11 @@ function Winline:render(opts)
   end
 
   if config.window.padding.left > 0 then
-    local pad = string.rep(config.window.padding_char, config.window.padding.left)
+    local pad = string.rep(config.window.padding_char_l, config.window.padding.left)
     content.text = pad .. content.text
   end
   if config.window.padding.right > 0 then
-    local pad = string.rep(config.window.padding_char, config.window.padding.right)
+    local pad = string.rep(config.window.padding_char_r, config.window.padding.right)
     content.text = content.text .. pad
   end
   if config.window.padding.right > 0 then

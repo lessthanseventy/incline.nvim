@@ -72,7 +72,8 @@ M.schema = Schema(function(s)
           return v
         end
       ),
-      padding_char = s:entry(' ', vx.string.length(1)),
+      padding_char_l = s:entry(' ', vx.string.length(0)),
+      padding_char_r = s:entry(' ', vx.string.length(0)),
       zindex = s:entry(50, vx.number.natural),
       winhighlight = s:entry(
         {
