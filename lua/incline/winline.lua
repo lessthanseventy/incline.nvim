@@ -15,10 +15,7 @@ function M.parse_render_result(node, offset)
   end
   assert(type(node) == 'table', 'expected render result node to be string or table')
   offset = offset or 0
-  local res = {
-    text = '',
-    hls = {},
-  }
+  local res = { text = '', hls = {} }
   for _, child in ipairs(node) do
     local inner_content = M.parse_render_result(child, offset + #res.text)
     local new_text = inner_content.text or ''
@@ -35,10 +32,7 @@ function M.parse_render_result(node, offset)
     end
   end
   if group then
-    table.insert(res.hls, 1, {
-      group = group,
-      range = { offset, offset + #res.text },
-    })
+    table.insert(res.hls, 1, { group = group, range = { offset, offset + #res.text } })
   end
   return res
 end
@@ -145,9 +139,7 @@ function Winline:get_win_opts()
     end
     table.insert(winhl, k .. ':' .. v)
   end
-  return vim.tbl_extend('force', config.window.options, {
-    winhighlight = table.concat(winhl, ','),
-  })
+  return vim.tbl_extend('force', config.window.options, { winhighlight = table.concat(winhl, ',') })
 end
 
 function Winline:refresh()
@@ -176,9 +168,8 @@ function Winline:render(opts)
   if self.hidden == HIDE_PERSIST or not self:is_alive() then
     return
   end
-  if
-    (config.hide.cursorline == true or (config.hide.cursorline == 'focused_win' and self.focused))
-    and self:get_win_geom_row() == a.nvim_win_call(self.target_win, vim.fn.winline)
+  if (config.hide.cursorline == true or (config.hide.cursorline == 'focused_win' and self.focused))
+      and self:get_win_geom_row() == a.nvim_win_call(self.target_win, vim.fn.winline)
   then
     self:hide(HIDE_TEMP)
     return
@@ -230,8 +221,8 @@ function Winline:render(opts)
   local content_text_changed = prev_content_len ~= content.text
   local content_text_len_changed = not self.content or not self.content.text or #self.content.text ~= #content.text
   local content_hls_changed = not self.content
-    or not self.content.hls
-    or not vim.deep_equal(self.content.hls, content.hls)
+      or not self.content.hls
+      or not vim.deep_equal(self.content.hls, content.hls)
 
   self.content = content
 
